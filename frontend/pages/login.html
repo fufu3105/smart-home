@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dang nhap - Smart Home</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root{--bg:#f4f6fb;--card:#ffffff;--accent:#6a4cff;--accent-2:#6bd3ff;--muted:#6b7280}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#e6f0ff 0%, #cfe0ff 100%);color:#0f172a}
+    .page-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{background:var(--card);width:100%;max-width:520px;border-radius:14px;padding:34px;box-shadow:0 12px 40px rgba(21,24,34,0.08);border:1px solid rgba(99,102,241,0.06)}
+    .brand{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+    .brand .logo{height:56px;width:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px}
+    h1{font-size:22px;margin:0 0 4px}
+    p.lead{margin:0 0 18px;color:var(--muted);font-size:14px}
+    .form-group{margin-bottom:14px}
+    label{display:block;font-size:13px;margin-bottom:8px;color:#374151}
+    input[type=text],input[type=password]{width:100%;padding:12px 14px;border:1px solid #eef2ff;background:#fbfdff;border-radius:10px;font-size:15px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.6)}
+    input:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(106,76,255,0.08)}
+    .actions{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+    button.primary{background:linear-gradient(90deg,var(--accent),#7b6bff);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(106,76,255,0.12)}
+    .hint{font-size:13px;color:var(--muted)}
+    .error{color:#b91c1c;font-size:13px;margin-top:10px}
+    .dev-hint{font-size:13px;color:#6b7280;margin-top:10px}
+    .pw-toggle{background:transparent;border:none;cursor:pointer;color:#6b7280}
+    @media (max-width:520px){.card{padding:20px;border-radius:10px}}
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="card" role="main">
+      <div class="brand">
+        <div class="logo">SH</div>
+        <div>
+          <h1>Smart Home</h1>
+          <p class="lead">Dang nhap de quan ly thiet bi va xem trang thai</p>
+        </div>
+      </div>
+
+      <form id="login-form" autocomplete="on">
+        <div class="form-group">
+          <label for="username">Ten dang nhap</label>
+          <input id="username" name="username" type="text" placeholder="vi du: admin" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Mat khau</label>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <input id="password" name="password" type="password" placeholder="mat khau" required style="flex:1">
+            <button type="button" class="pw-toggle" id="pw-toggle">Hien</button>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="hint">Dang nhap bang tai khoan duoc luu trong MySQL</span>
+          <button type="submit" class="primary">Dang nhap</button>
+        </div>
+        <div id="msg" class="error" role="status" aria-live="polite" style="display:none"></div>
+        <div class="dev-hint">Tai khoan mau: admin/adminpass, alice/alicepass, bob/bobpass</div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const DEFAULT_ORIGIN = 'http://127.0.0.1:5000';
+    const origin = window.location.protocol === 'file:' ? DEFAULT_ORIGIN : (window.location.origin || DEFAULT_ORIGIN);
+    const API_BASE = `${origin}/api`;
+
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('msg');
+
+      msg.style.display = 'none';
+      msg.textContent = '';
+
+      if (!username || !password) {
+        msg.textContent = 'Vui long nhap day du thong tin.';
+        msg.style.display = 'block';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          msg.textContent = payload.error || `Dang nhap that bai (status ${response.status})`;
+          msg.style.display = 'block';
+          return;
+        }
+
+        if (payload.token) localStorage.setItem('sh_token', payload.token);
+        localStorage.setItem('sh_user', JSON.stringify(payload.user || {}));
+
+        if (window.location.protocol === 'file:') {
+          window.location.href = '../index.html';
+        } else {
+          window.location.href = '/';
+        }
+      } catch (error) {
+        msg.textContent = error.message || 'Loi ket noi server.';
+        msg.style.display = 'block';
+      }
+    });
+
+    document.getElementById('pw-toggle').addEventListener('click', function () {
+      const passwordInput = document.getElementById('password');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        this.textContent = 'An';
+      } else {
+        passwordInput.type = 'password';
+        this.textContent = 'Hien';
+      }
+    });
+  </script>
+</body>
+</html>

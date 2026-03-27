@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="dashboard-container app-container">
+    <aside class="sidebar">
+        <a href="index.html"><div class="logo"><i class="fas fa-home"></i></div></a>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item active"><i class="fas fa-th-large"></i></a>
+            <a href="pages/devices.html" class="nav-item"><i class="fas fa-mobile-alt"></i></a>
+            <a href="pages/modes.html" class="nav-item"><i class="fas fa-list-ul"></i></a>
+            <a href="pages/members.html" class="nav-item"><i class="fas fa-user-friends"></i></a>
+            <a href="pages/power.html" class="nav-item"><i class="fas fa-chart-bar"></i></a>
+        </nav>
+    </aside>
+
+    <main class="main-content main-wrapper">
+        <header class="top-header header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="header-actions">
+                <!-- <i class="fas fa-cog icon" style="font-size: 20px; color: #666; cursor: pointer;"></i> -->
+                <div class="notification-wrapper">
+                    <i class="fas fa-bell bell-icon" id="bell-icon" style="position: relative;">
+                        <span style="position: absolute; top: -5px; right: -5px; background: red; width: 10px; height: 10px; border-radius: 50%;"></span>
+                    </i>
+                    <div class="alerts-dropdown hidden" id="alerts-dropdown">
+                        <div class="card-header" style="margin-bottom: 15px;">
+                            <h3><i class="fas fa-bell"></i> Alerts</h3>
+                            <span class="badge-red">1 new</span>
+                        </div>
+                        <div class="list-container">
+                            <div class="list-item alert-item red">
+                                <div><h4>INTRUSION</h4><p>Motion detected...</p></div>
+                                <span class="time">2 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-profile" id="user-profile">
+                    <div class="avatar" id="avatar">U</div>
+                    <span id="user-name" style="margin-left: 10px; font-weight: bold; color: #333;">User</span>
+                    <button id="logout-btn" title="Đăng xuất" style="margin-left:12px;background:transparent;border:none;cursor:pointer;color:#666;font-size:14px">Đăng xuất</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h2>Hello, User!</h2>
+                <p>Welcome Home! The air quality is good & fresh you can go out today.</p>
+            </div>
+        </section>
+        
+        <section class="sensors-grid">
+            <div class="sensor-card">
+                <div class="sensor-header">
+                    <i class="fas fa-thermometer-half" style="color: #ff7b00;"></i>
+                    <span class="status ok">OK</span>
+                </div>
+                <h3>27.4°C</h3>
+                <p>Temperature</p>
+            </div>
+            
+            <div class="sensor-card">
+                <div class="sensor-header">
+                    <i class="fas fa-tint" style="color: #00b4d8;"></i>
+                    <span class="status ok">OK</span>
+                </div>
+                <h3>62%</h3>
+                <p>Humidity</p>
+            </div>
+            
+            <div class="sensor-card">
+                <div class="sensor-header">
+                    <i class="fas fa-wind" style="color: #90e0ef;"></i>
+                    <span class="status ok">OK</span>
+                </div>
+                <h3>12 ppm</h3>
+                <p>Gas Level</p>
+            </div>
+            
+            <div class="sensor-card alert">
+                <div class="sensor-header">
+                    <i class="fas fa-eye" style="color: #e63946;"></i>
+                    <span class="status warning">!</span>
+                </div>
+                <h3>Detected</h3>
+                <p>Motion</p>
+            </div>
+            
+            <div class="sensor-card">
+                <div class="sensor-header">
+                    <i class="fas fa-bolt" style="color: #ffb703;"></i>
+                    <span class="status ok">OK</span>
+                </div>
+                <h3>340 W</h3>
+                <p>Power</p>
+            </div>
+            
+            <div class="sensor-card">
+                <div class="sensor-header">
+                    <i class="fas fa-fire" style="color: #e63946;"></i>
+                    <span class="status ok">OK</span>
+                </div>
+                <h3>Clear</h3>
+                <p>Fire</p>
+            </div>
+        </section>
+
+        <section class="grid-2-col">
+            <div class="card card-devices">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3><i class="fas fa-mobile-alt"></i> Devices</h3>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span class="meta" id="devices-active-meta"></span>
+                        <a href="pages/devices.html" class="nav-btn" style="text-decoration:none; color:inherit;"><i class="fas fa-chevron-right text-gray"></i></a>
+                    </div>
+                </div>
+                
+                <div class="devices-grid" id="full-devices-list">
+                    <div class="device-item" data-device="light_living">
+                        <div class="device-icon light"><i class="far fa-lightbulb"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Living Room Light</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="fan_kitchen">
+                        <div class="device-icon fan"><i class="fas fa-fan"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Kitchen Fan</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="lcd_living">
+                        <div class="device-icon screen"><i class="fas fa-desktop"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">LCD Display</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="light_bed">
+                        <div class="device-icon light"><i class="far fa-lightbulb"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Bedroom Light</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="door_main">
+                        <div class="device-icon door"><i class="fas fa-door-closed"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Door</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="alarm_living">
+                        <div class="device-icon alarm"><i class="fas fa-bell"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Alarm</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-modes">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3><i class="fas fa-list-ul"></i> Modes</h3>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <a href="pages/modes.html" class="nav-btn" style="text-decoration:none; color:inherit;"><i class="fas fa-chevron-right text-gray"></i></a>
+                    </div>
+                </div>
+                <div class="modes-grid">
+                    <div class="mode-btn active"><i class="fas fa-moon"></i> <span>Sleep Mode</span></div>
+                    <div class="mode-btn"><i class="fas fa-home"></i> <span>Home Mode</span></div>
+                    <div class="mode-btn"><i class="fas fa-sign-out-alt"></i> <span>Away Mode</span></div>
+                    <div class="mode-btn"><i class="fas fa-glass-cheers"></i> <span>Party Mode</span></div>
+                </div>
+            </div>
+        </section>
+        <section class="grid-2-col" style="margin-bottom: 25px;">
+            
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="font-size: 16px; color: #333; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-users" style="color: #6a4cff; background: #f3f0ff; padding: 6px; border-radius: 6px;"></i> Members
+                    </h3>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button  class="btn-sm"><a href="pages/members.html" style="text-decoration:none;">+ Invite</a></button>
+                        <a href="pages/members.html" class="nav-btn" style="text-decoration:none; color:inherit;"><i class="fas fa-chevron-right text-gray"></i></a>
+                    </div>
+                </div>
+                <div class="list-container" id="members-compact-list">
+                    <div class="list-item" style="background: #f8f9fc; margin-bottom: 8px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="avatar-circle bg-purple-light" style="width: 36px; height: 36px; font-size: 14px;">H</div>
+                            <div>
+                                <h4 style="margin: 0; font-size: 13px; color: #333;">User 1</h4>
+                                <span style="font-size: 10px; color: #6a4cff; font-weight: bold;">ADMIN</span>
+                            </div>
+                        </div>
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #34c759;"></div>
+                    </div>
+                    <div class="list-item" style="background: #f8f9fc; margin-bottom: 8px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="avatar-circle bg-blue-light" style="width: 36px; height: 36px; font-size: 14px;">P</div>
+                            <div>
+                                <h4 style="margin: 0; font-size: 13px; color: #333;">User 2</h4>
+                                <span style="font-size: 10px; color: #1a73e8; font-weight: bold;">RESIDENT</span>
+                            </div>
+                        </div>
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #34c759;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="font-size: 16px; color: #333; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-home" style="color: #6a4cff; background: #f3f0ff; padding: 6px; border-radius: 6px;"></i> House Map
+                    </h3>
+                    <div style="display:flex;gap:10px;align-items:center">
+                        <span style="font-size:12px;color:#666">Tap a room to toggle its lights</span>
+                    </div>
+                </div>
+                <div class="list-container" style="display:flex;gap:18px;align-items:flex-start;padding:18px;">
+                    <div id="house-map" style="flex:1;">
+                        <!-- Simple floorplan SVG: clickable rooms -->
+                        <svg viewBox="0 0 400 240" width="100%" height="220" style="border-radius:8px;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,0.04);">
+                            <rect id="room-living" x="10" y="10" width="240" height="120" rx="8" fill="#f8f8fb" stroke="#e8e8ef" onclick="window.houseMapToggle('living')"></rect>
+                            <text x="30" y="35" font-size="14" fill="#333">Living Room</text>
+                            <rect id="room-bedroom" x="260" y="10" width="130" height="90" rx="8" fill="#f8f8fb" stroke="#e8e8ef" onclick="window.houseMapToggle('bedroom')"></rect>
+                            <text x="270" y="35" font-size="14" fill="#333">Bedroom</text>
+                            <rect id="room-kitchen" x="10" y="140" width="140" height="80" rx="8" fill="#f8f8fb" stroke="#e8e8ef" onclick="window.houseMapToggle('kitchen')"></rect>
+                            <text x="30" y="165" font-size="14" fill="#333">Kitchen</text>
+                            <rect id="room-door" x="160" y="140" width="230" height="80" rx="8" fill="#f8f8fb" stroke="#e8e8ef" onclick="window.houseMapToggle('door')"></rect>
+                            <text x="180" y="165" font-size="14" fill="#333">Entrance</text>
+                        </svg>
+                    </div>
+                    <div style="width:220px;">
+                        <div style="font-size:13px;color:#666;margin-bottom:8px">Room Devices</div>
+                        <div id="house-map-legend" style="display:flex;flex-direction:column;gap:8px"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="grid-2-col-asym" style="margin-bottom: 30px;">
+            
+            <div class="card" style="display: flex; flex-direction: column; padding: 25px;">
+                <div class="card-header" style="margin-bottom: 20px; align-items: flex-start;">
+                    <h3 style="font-size: 18px; color: #333; font-weight: bold; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-bolt" style="color: #ffb703; background: #fff8e1; padding: 8px; border-radius: 8px;"></i> Power Consumed
+                    </h3>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 12px; color: #666; font-weight: 500;">This Week</span>
+                        <a href="pages/power.html" class="nav-btn" style="color: #999; text-decoration: none;"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 40px; margin-bottom: 10px; padding: 0 5px;">
+                    <div>
+                        <span style="color: #999; font-size: 12px;">Current Load</span>
+                        <div style="font-size: 28px; font-weight: bold; color: #333; margin-top: 5px;">1,425 <span style="font-size: 14px; color: #999;">W</span></div>
+                    </div>
+                    <div>
+                        <span style="color: #999; font-size: 12px;">Total</span>
+                        <div style="font-size: 28px; font-weight: bold; color: #6a4cff; margin-top: 5px;">42.5 <span style="font-size: 14px; color: #999;">kWh</span></div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; width: 100%; min-height: 120px; position: relative;">
+                    <svg viewBox="0 0 500 120" preserveAspectRatio="none" style="width: 100%; height: 100%; overflow: visible;">
+                        <defs>
+                            <linearGradient id="miniChartGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#6a4cff" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#6a4cff" stop-opacity="0.0"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M0,100 C50,80 100,20 150,40 C200,60 250,110 300,80 C350,50 400,10 450,30 L500,10 L500,120 L0,120 Z" fill="url(#miniChartGradient)" />
+                        <path d="M0,100 C50,80 100,20 150,40 C200,60 250,110 300,80 C350,50 400,10 450,30 L500,10" fill="none" stroke="#6a4cff" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column; padding: 25px;">
+                <div class="card-header" style="margin-bottom: 20px;">
+                    <h3 style="font-size: 18px; color: #333; font-weight: bold; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-magic" style="color: #4ba3e3; background: #e8f0fe; padding: 8px; border-radius: 8px;"></i> AI Insights
+                    </h3>
+                    <span style="font-size: 11px; background: #e8f0fe; color: #1a73e8; padding: 4px 8px; border-radius: 10px; font-weight: bold;">NEW</span>
+                </div>
+                
+                <div class="recommendation-list" id="ai-rec-list">
+                    <div class="ai-rec-item">
+                        <div class="rec-icon"><i class="fas fa-snowflake" style="color: #4ba3e3;"></i></div>
+                        <div class="rec-content">
+                            <h4>Optimize AC Schedule</h4>
+                            <p>You usually leave the Living Room AC on after 11 PM. Turn off automatically?</p>
+                            <span class="rec-save">Est. Save: $5.20 / mo</span>
+                        </div>
+                        <div class="rec-actions">
+                            <button class="btn-rec-accept" title="Accept"><i class="fas fa-check"></i></button>
+                            <button class="btn-rec-reject" title="Dismiss"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="ai-rec-item">
+                        <div class="rec-icon"><i class="far fa-lightbulb" style="color: #fce14b;"></i></div>
+                        <div class="rec-content">
+                            <h4>Dim Lights at Night</h4>
+                            <p>Reduce bedroom light brightness to 30% after 10 PM for better sleep.</p>
+                        </div>
+                        <div class="rec-actions">
+                            <button class="btn-rec-accept" title="Accept"><i class="fas fa-check"></i></button>
+                            <button class="btn-rec-reject" title="Dismiss"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ai-empty-state" style="display: none; text-align: center; color: #999; padding: 30px 0;">
+                    <i class="fas fa-check-circle" style="font-size: 40px; color: #e6f4ea; margin-bottom: 15px;"></i>
+                    <p style="font-size: 14px; font-weight: 500;">You're all caught up!</p>
+                    <span style="font-size: 12px;">AI is analyzing new data...</span>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</div>
+<script src="js/api_client.js"></script>
+<script src="js/ui_interactions.js"></script>
+</body>
+</html>

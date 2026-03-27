@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - Power Consumption</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="dashboard-container app-container">
+    <aside class="sidebar">
+        <a href="../index.html"><div class="logo"><i class="fas fa-home"></i></div></a>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-item"><i class="fas fa-th-large"></i></a>
+            <a href="devices.html" class="nav-item"><i class="fas fa-mobile-alt"></i></a>
+            <a href="modes.html" class="nav-item"><i class="fas fa-list-ul"></i></a>
+            <a href="members.html" class="nav-item"><i class="fas fa-user-friends"></i></a>
+            <a href="power.html" class="nav-item active"><i class="fas fa-chart-bar"></i></a>
+        </nav>
+    </aside>
+
+    <main class="main-content main-wrapper">
+        <header class="top-header header" style="justify-content: flex-end; margin-bottom: 10px;">
+            <div class="header-actions">
+                <button class="btn-modern purple hidden" style="padding: 10px 20px; font-size: 14px; border-radius: 20px; background: #6a4cff; box-shadow: 0 4px 10px rgba(106,76,255,0.3);"><i class="fas fa-download"></i> Export CSV</button>
+                <div class="user-profile"><div class="avatar" style="background:#1a1254;">H</div><span>Scarlett</span></div>
+            </div>
+        </header>
+
+        <div class="card-header" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="../index.html" style="font-size: 20px; color: #666; text-decoration: none;"><i class="fas fa-arrow-left"></i></a>
+            <h2 style="margin: 0; font-size: 22px; font-weight: bold; color: #1a1a1a;">Energy Monitoring & NILM Analysis</h2>
+        </div>
+        
+        <div class="devices-split-layout" style="align-items: stretch;">
+            
+            <div class="card" style="flex: 2; padding: 30px; display: flex; flex-direction: column;">
+                <div class="card-header" style="margin-bottom: 30px;">
+                    <div>
+                        <h3 style="font-size: 18px; color: #333; margin-bottom: 8px; display: flex; align-items: center;">
+                            <i class="fas fa-bolt" style="color: #ffb703; background: #fff8e1; padding: 6px 10px; border-radius: 8px; margin-right: 12px;"></i> Total Power Consumed
+                        </h3>
+                        <p style="color: #999; font-size: 13px; margin-left: 45px;">Real-time main source tracking</p>
+                    </div>
+                    <div class="time-tabs">
+                        <button class="time-tab" data-period="day">Day</button>
+                        <button class="time-tab active" data-period="week">Week</button>
+                        <button class="time-tab" data-period="month">Month</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 40px; margin-bottom: 40px; margin-left: 20px;">
+                    <div>
+                        <span style="color: #999; font-size: 13px;">Current Load</span>
+                        <div style="font-size: 40px; font-weight: bold; color: #333; margin-top: 5px;"><span id="val-current-load">1,425</span> <span style="font-size: 18px; color: #666; font-weight: 500;">W</span></div>
+                    </div>
+                    <div>
+                        <span id="lbl-total-consumed" style="color: #999; font-size: 13px;">This Week</span>
+                        <div style="font-size: 40px; font-weight: bold; color: #6a4cff; margin-top: 5px;"><span id="val-total-consumed">42.5</span> <span style="font-size: 18px; color: #999; font-weight: 500;">kWh</span></div>
+                    </div>
+                </div>
+
+                <div id="chart-container" style="flex: 1; width: 100%; position: relative; min-height: 250px;">
+                    
+                    <div id="chart-tooltip" style="position: absolute; display: none; background: #1a1254; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; pointer-events: none; transform: translate(-50%, -120%); z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">1425 W</div>
+                    <div id="hover-line" style="position: absolute; display: none; width: 2px; height: 180px; background: rgba(106, 76, 255, 0.3); top: 20px; pointer-events: none; z-index: 5;"></div>
+                    <div id="hover-dot" style="position: absolute; display: none; width: 12px; height: 12px; background: #fff; border: 3px solid #6a4cff; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 6; box-shadow: 0 0 10px rgba(106,76,255,0.5);"></div>
+
+                    <svg viewBox="0 0 550 220" preserveAspectRatio="none" style="width: 100%; height: 100%; overflow: visible;">
+                        <text x="35" y="25" fill="#aaa" font-size="11" text-anchor="end">2000 W</text>
+                        <line x1="45" y1="20" x2="550" y2="20" stroke="#f0f0f5" stroke-width="1" />
+                        
+                        <text x="35" y="85" fill="#aaa" font-size="11" text-anchor="end">1500 W</text>
+                        <line x1="45" y1="80" x2="550" y2="80" stroke="#f0f0f5" stroke-width="1" />
+                        
+                        <text x="35" y="145" fill="#aaa" font-size="11" text-anchor="end">1000 W</text>
+                        <line x1="45" y1="140" x2="550" y2="140" stroke="#f0f0f5" stroke-width="1" />
+                        
+                        <text x="35" y="205" fill="#aaa" font-size="11" text-anchor="end">500 W</text>
+                        <line x1="45" y1="200" x2="550" y2="200" stroke="#f0f0f5" stroke-width="1" />
+                        
+                        <defs>
+                            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#6a4cff" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#6a4cff" stop-opacity="0.0"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <path id="chart-path-fill" d="" fill="url(#chartGradient)" />
+                        <path id="chart-path-stroke" d="" fill="none" stroke="#6a4cff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        
+                        <g id="chart-labels-container"></g>
+                    </svg>
+                </div>
+            </div>
+
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+                <div class="card" style="padding: 25px;">
+                    <h3 style="font-size: 16px; color: #333; margin-bottom: 20px;"><i class="fas fa-wallet" style="color: #34c759; margin-right: 8px;"></i> Estimated Cost (Tiered)</h3>
+                    <div style="background: #f8f9fc; padding: 25px 20px; border-radius: 12px; text-align: center;">
+                        <span id="lbl-cost-period" style="color: #666; font-size: 14px;">Total this week</span>
+                        <div id="val-cost" style="font-size: 38px; font-weight: bold; color: #34c759; margin: 10px 0;">$0.00</div>
+                        <div id="val-tier" class="status-badge" style="background: #e6f4ea; color: #1e8e3e; font-size: 12px; padding: 6px 15px;">Currently in Tier 1</div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 25px; flex: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 style="font-size: 16px; color: #333; margin: 0;"><i class="fas fa-microchip" style="color: #4ba3e3; margin-right: 8px;"></i> NILM Analysis</h3>
+                        <span style="font-size: 11px; background: #e8f0fe; color: #1a73e8; padding: 4px 8px; border-radius: 10px; font-weight: bold;">AI ACTIVE</span>
+                    </div>
+                    <p style="font-size: 12px; color: #888; margin-bottom: 20px; line-height: 1.5;">Inferred active appliances without individual sensors based on load signatures.</p>
+                    <div class="nilm-list" id="nilm-list-container"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="../js/api_client.js"></script>
+<script src="../js/ui_interactions.js"></script>
+</body>

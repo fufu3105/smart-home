@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - Members</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="dashboard-container app-container">
+    <aside class="sidebar">
+        <a href="../index.html"><div class="logo"><i class="fas fa-home"></i></div></a>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-item"><i class="fas fa-th-large"></i></a>
+            <a href="devices.html" class="nav-item"><i class="fas fa-mobile-alt"></i></a>
+            <a href="modes.html" class="nav-item"><i class="fas fa-list-ul"></i></a>
+            <a href="members.html" class="nav-item active"><i class="fas fa-user-friends"></i></a>
+            <a href="power.html" class="nav-item"><i class="fas fa-chart-bar"></i></a>
+        </nav>
+    </aside>
+
+    <main class="main-content main-wrapper">
+        <header class="top-header header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i><input type="text" placeholder="Search members...">
+            </div>
+            <div class="header-actions">
+                <button class="btn-modern purple" style="padding: 10px 20px; font-size: 14px; border-radius: 20px;">+ Invite Member</button>
+                <div class="user-profile"><div class="avatar">H</div><span>Scarlett</span></div>
+            </div>
+        </header>
+
+        <div class="card-header" style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+            <a href="../index.html" style="font-size: 20px; color: #666; text-decoration: none;"><i class="fas fa-arrow-left"></i></a>
+            <h2>Identity & Access Management</h2>
+        </div>
+        
+        <div class="devices-split-layout" id="members-view-container">
+            
+            <div class="card control-column" id="main-member-panel" style="min-height: 450px; display: flex; justify-content: center; align-items: center; text-align: center; border: 2px dashed #e5e5ea; padding: 20px;">
+                <div style="color: #999; font-size: 16px;">
+                    <i class="fas fa-id-card-alt" style="font-size: 40px; margin-bottom: 15px; color: #ccc;"></i>
+                    <p>Select a member to view access details</p>
+                </div>
+            </div>
+
+            <div class="card list-column">
+                <div class="list-column" style="display: flex; flex-direction: column; gap: 25px;">
+                
+                <div class="card" style="padding: 25px;">
+                    <div class="card-header" style="margin-bottom: 20px;">
+                        <h3 style="font-size: 18px; color: #333; margin: 0;">
+                            <i class="fas fa-users" style="color: #6a4cff; background: #f3f0ff; padding: 8px; border-radius: 8px; margin-right: 10px;"></i> Registered Members
+                        </h3>
+                    </div>
+                    <div class="devices-grid large-cards" id="full-members-list">
+                        <div class="device-item member-card-item" data-user="user1">
+                            <div class="avatar-circle bg-purple-light" style="width: 50px; height: 50px; font-size: 20px; flex-shrink: 0; margin: 0;">H</div>
+                            <div class="device-info">
+                                <span class="device-name" style="font-size: 15px;">User 1</span>
+                                <span style="font-size: 11px; font-weight: bold; color: #6a4cff;">ADMIN</span>
+                            </div>
+                        </div>
+                        
+                        <div class="device-item member-card-item" data-user="user2">
+                            <div class="avatar-circle bg-blue-light" style="width: 50px; height: 50px; font-size: 20px; flex-shrink: 0; margin: 0;">P</div>
+                            <div class="device-info">
+                                <span class="device-name" style="font-size: 15px;">User 2</span>
+                                <span style="font-size: 11px; font-weight: bold; color: #1a73e8;">RESIDENT</span>
+                            </div>
+                        </div>
+                        
+                        <div class="device-item member-card-item" data-user="user3">
+                            <div class="avatar-circle bg-green-light" style="width: 50px; height: 50px; font-size: 20px; flex-shrink: 0; margin: 0;">C</div>
+                            <div class="device-info">
+                                <span class="device-name" style="font-size: 15px;">User 3</span>
+                                <span style="font-size: 11px; font-weight: bold; color: #1e8e3e;">RESIDENT</span>
+                            </div>
+                        </div>
+                        
+                        <div class="device-item member-card-item" data-user="user4">
+                            <div class="avatar-circle bg-orange-light" style="width: 50px; height: 50px; font-size: 20px; flex-shrink: 0; margin: 0;">G</div>
+                            <div class="device-info">
+                                <span class="device-name" style="font-size: 15px;">User 4</span>
+                                <span style="font-size: 11px; font-weight: bold; color: #d93025;">GUEST (Temp)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 25px; flex: 1;">
+                    <div class="card-header" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="font-size: 18px; color: #333; margin: 0;">
+                            <i class="fas fa-list-alt" style="color: #6a4cff; background: #f3f0ff; padding: 8px; border-radius: 8px; margin-right: 10px;"></i> System Access Log
+                        </h3>
+                        <button class="btn-sm" style="padding: 8px 15px; font-size: 12px; background: #f8f9fc; color: #666;">View All</button>
+                    </div>
+                    
+                    <div class="list-container">
+                        <div class="list-item" style="border-bottom: 1px solid #f0f0f5; padding-bottom: 12px; margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-check-circle" style="color: #34c759; font-size: 22px;"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 14px; color: #333;">User 1 unlocked door</h4>
+                                    <span style="font-size: 12px; color: #999;">Method: Card</span>
+                                </div>
+                            </div>
+                            <span style="font-size: 12px; color: #999; font-weight: 500;">10:22 PM</span>
+                        </div>
+                        
+                        <div class="list-item" style="border-bottom: 1px solid #f0f0f5; padding-bottom: 12px; margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-check-circle" style="color: #34c759; font-size: 22px;"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 14px; color: #333;">User 2 unlocked door</h4>
+                                    <span style="font-size: 12px; color: #999;">Method: Face ID</span>
+                                </div>
+                            </div>
+                            <span style="font-size: 12px; color: #999; font-weight: 500;">09:15 PM</span>
+                        </div>
+
+                        <div class="list-item" style="border-bottom: 1px solid #f0f0f5; padding-bottom: 12px; margin-bottom: 12px; background: #ffecec; border-radius: 8px; padding: 10px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-times-circle" style="color: #ff3b30; font-size: 22px;"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 14px; color: #ff3b30;">Unknown entry attempt</h4>
+                                    <span style="font-size: 12px; color: #ff3b30; opacity: 0.8;">Invalid PIN Code entered</span>
+                                </div>
+                            </div>
+                            <span style="font-size: 12px; color: #ff3b30; font-weight: bold;">03:47 PM</span>
+                        </div>
+
+                        <div class="list-item">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <i class="fas fa-check-circle" style="color: #34c759; font-size: 22px;"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 14px; color: #333;">User 3 unlocked door</h4>
+                                    <span style="font-size: 12px; color: #999;">Method: Fingerprint</span>
+                                </div>
+                            </div>
+                            <span style="font-size: 12px; color: #999; font-weight: 500;">06:30 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+        </div>
+        
+    </main>
+</div>
+<script src="../js/api_client.js"></script>
+<script src="../js/ui_interactions.js"></script>
+</body>
+</html>

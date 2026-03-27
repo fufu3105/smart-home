@@ -1,0 +1,44 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment variables
+backend/.env
+
+# Flask
+instance/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build / cache
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Secrets / local config
+config.local.py
+secrets.py
+
+backend/.env
+
+backend/.env

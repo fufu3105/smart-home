@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - Modes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="dashboard-container app-container">
+    <aside class="sidebar">
+        <a href="../index.html"><div class="logo"><i class="fas fa-home"></i></div></a>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-item"><i class="fas fa-th-large"></i></a>
+            <a href="devices.html" class="nav-item"><i class="fas fa-mobile-alt"></i></a>
+            <a href="modes.html" class="nav-item active"><i class="fas fa-list-ul"></i></a>
+            <a href="members.html" class="nav-item"><i class="fas fa-user-friends"></i></a>
+            <a href="power.html" class="nav-item"><i class="fas fa-chart-bar"></i></a>
+        </nav>
+    </aside>
+
+    <main class="main-content main-wrapper">
+        <header class="top-header header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i><input type="text" placeholder="Search modes...">
+            </div>
+            <div class="header-actions">
+                <div class="user-profile"><div class="avatar">H</div><span>Scarlett</span></div>
+            </div>
+        </header>
+
+        <div class="card-header" style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+            <a href="../index.html" style="font-size: 20px; color: #666; text-decoration: none;"><i class="fas fa-arrow-left"></i></a>
+            <h2>Scene / Mode Management</h2>
+        </div>
+        
+        <div class="devices-split-layout" id="modes-view-container">
+            
+            <div class="card control-column" id="main-mode-panel" style="min-height: 400px; display: flex; justify-content: center; align-items: center; text-align: center; border: 2px dashed #e5e5ea; padding: 20px;">
+                <div style="color: #999; font-size: 16px;">
+                    <i class="fas fa-magic" style="font-size: 40px; margin-bottom: 15px; color: #ccc;"></i>
+                    <p>Select a mode to view its actions</p>
+                </div>
+            </div>
+
+            <div class="card list-column">
+                <div class="devices-grid large-cards" id="full-modes-list">
+                    <div class="device-item mode-card-item" data-mode="home">
+                        <div class="device-icon" style="background: #4ba3e3;"><i class="fas fa-home"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Home Mode</span>
+                            <span style="font-size: 12px; color: #999;">Welcome back</span>
+                        </div>
+                    </div>
+                    
+                    <div class="device-item mode-card-item" data-mode="away">
+                        <div class="device-icon" style="background: #a35c15;"><i class="fas fa-sign-out-alt"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Away Mode</span>
+                            <span style="font-size: 12px; color: #999;">Secure the house</span>
+                        </div>
+                    </div>
+                    
+                    <div class="device-item mode-card-item" data-mode="sleep">
+                        <div class="device-icon" style="background: #6a4cff;"><i class="fas fa-moon"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Sleep Mode</span>
+                            <span style="font-size: 12px; color: #999;">Rest easy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="device-item mode-card-item" data-mode="party">
+                        <div class="device-icon" style="background: #ff4f53;"><i class="fas fa-glass-cheers"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Party Mode</span>
+                            <span style="font-size: 12px; color: #999;">Let's celebrate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+<script src="../js/api_client.js"></script>
+<script src="../js/ui_interactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - Devices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="dashboard-container app-container">
+    <aside class="sidebar">
+        <a href="../index.html"><div class="logo"><i class="fas fa-home"></i></div></a>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-item"><i class="fas fa-th-large"></i></a>
+            <a href="devices.html" class="nav-item active"><i class="fas fa-mobile-alt"></i></a>
+            <a href="modes.html" class="nav-item"><i class="fas fa-list-ul"></i></a>
+            <a href="members.html" class="nav-item"><i class="fas fa-user-friends"></i></a>
+            <a href="power.html" class="nav-item"><i class="fas fa-chart-bar"></i></a>
+        </nav>
+    </aside>
+
+    <main class="main-content main-wrapper">
+        <header class="top-header header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i><input type="text" placeholder="Search devices...">
+            </div>
+            <div class="header-actions">
+                <div class="user-profile"><div class="avatar">H</div><span>Scarlett</span></div>
+            </div>
+        </header>
+
+        <div class="card-header" style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+            <a href="../index.html" style="font-size: 20px; color: #666; text-decoration: none;"><i class="fas fa-arrow-left"></i></a>
+            <h2>All Devices Control</h2>
+        </div>
+        
+        <div id="room-summary" style="display:flex;gap:12px;margin-bottom:18px;">
+            <!-- room summary cards injected by api_client.fetchDevices() -->
+        </div>
+        
+        <div class="devices-split-layout">
+            
+            <div class="card control-column" id="main-control-panel" style="min-height: 400px; display: flex; justify-content: center; align-items: center; text-align: center; border: 2px dashed #e5e5ea; padding: 20px;">
+                <div style="color: #999; font-size: 16px;">
+                    <i class="fas fa-hand-pointer" style="font-size: 40px; margin-bottom: 15px; color: #ccc;"></i>
+                    <p>Select a device to control</p>
+                </div>
+            </div>
+
+            <div class="card list-column">
+                <div class="devices-grid large-cards" id="full-devices-list">
+                    <div class="device-item" data-device="light_living">
+                        <div class="device-icon light"><i class="far fa-lightbulb"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Living Room Light</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="fan_kitchen">
+                        <div class="device-icon fan"><i class="fas fa-fan"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Kitchen Fan</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="lcd_living">
+                        <div class="device-icon screen"><i class="fas fa-desktop"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">LCD Display</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="door_main">
+                        <div class="device-icon light"><i class="far fa-lightbulb"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Door</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="device-item" data-device="alarm_living">
+                        <div class="device-icon alarm"><i class="fas fa-bell"></i></div>
+                        <div class="device-info">
+                            <span class="device-name">Alarm</span>
+                            <label class="switch" onclick="event.stopPropagation()"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="grid-2-col" style="margin-top:20px;">
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="font-size: 16px; color: #333; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-list-alt" style="color: #6a4cff; background: #f3f0ff; padding: 6px; border-radius: 6px;"></i> Device Log
+                    </h3>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span class="meta" id="devices-log-meta"></span>
+                    </div>
+                </div>
+                <div class="list-container" id="device-log-list">
+                    <!-- device logs will be injected here by api_client.js -->
+                </div>
+            </div>
+        </section>
+
+        <div id="device-modal" class="modal-overlay hidden">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3 id="modal-title">Device Control</h3>
+                    <button id="close-modal" class="close-btn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body" id="modal-body"></div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="../js/api_client.js"></script>
+<script src="../js/ui_interactions.js"></script>
+</body>
+</html>
